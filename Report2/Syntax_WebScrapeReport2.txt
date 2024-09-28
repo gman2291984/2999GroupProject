@@ -1,0 +1,44 @@
+import webbrowser
+from tkinter import Tk, Button, Frame, Label
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument('--ignore-certificate-errors')
+
+# Initialize the Chrome WebDriver with options
+driver = webdriver.Chrome(options=chrome_options)
+
+# Function to open ESPN website
+def open_espn():
+    driver.get('https://www.espn.com/')
+    print("Opened ESPN website.")
+    # You can stop here as requested or close the driver if done
+    # driver.quit()
+
+# Create the main window
+root = Tk()
+root.title("Headlines")
+root.configure(bg="#2C3E50")
+
+# Create a frame for category selection
+category_frame = Frame(root, bg="#2C3E50")
+category_frame.pack(padx=10, pady=10)
+
+# Add a label for the category selection
+category_label = Label(category_frame, text="Category:", font=("Helvetica", 16), fg="white", bg="#2C3E50")
+category_label.grid(row=0, column=0, padx=5)
+
+# Add the "Sports" button to open ESPN
+sports_button = Button(category_frame, text="Sports", font=("Helvetica", 14), fg="white", bg="#1ABC9C", command=open_espn)
+sports_button.grid(row=0, column=1, padx=5)
+
+# Start the main event loop
+root.mainloop()
+
+# Quit the driver after closing the application (you can keep or remove this)
+driver.quit()
+
